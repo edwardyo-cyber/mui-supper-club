@@ -43,3 +43,2638 @@
   <!-- Performance -->
   <link rel="preload" href="images/hero-bg.jpg" as="image">
   <meta name="theme-color" content="#0a0a0a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500;600&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+       MUI 無為 — Design System
+       Black Theme / Modern Japanese / High-End Luxury
+       ═══════════════════════════════════════════ */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --black-rich: #050505;
+      --black-soft: #111111;
+      --charcoal: #1a1a1a;
+      --graphite: #2a2a2a;
+      --ash: #3a3a3a;
+      --stone: #666666;
+      --silver: #999999;
+      --mist: #cccccc;
+      --cream: #e8e4de;
+      --white: #f5f3ef;
+      --gold: #c4a265;
+      --gold-light: #d4b87a;
+      --gold-dim: #8a7245;
+      --accent: #8b7355;
+      --vermillion: #D4411E;
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-jp: 'Noto Serif JP', serif;
+      --font-body: 'Inter', sans-serif;
+
+      --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-dramatic: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: var(--ash) var(--black);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* ── Cursor ── */
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transition: transform 0.15s var(--ease-luxury), opacity 0.3s;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+
+    .cursor.hovering {
+      transform: translate(-50%, -50%) scale(2.5);
+      background: rgba(196, 162, 101, 0.08);
+    }
+
+    /* ── Preloader ── */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--black-rich);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.8s var(--ease-luxury), visibility 0.8s;
+    }
+
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .preloader-text {
+      font-family: var(--font-jp);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 200;
+      color: var(--white);
+      letter-spacing: 0.3em;
+      animation: breathe 2s var(--ease-luxury) infinite;
+    }
+
+    .preloader-line {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin-top: 2rem;
+      animation: expandLine 1.5s var(--ease-luxury) infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes expandLine {
+      0%, 100% { transform: scaleX(0.3); }
+      50% { transform: scaleX(1); }
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.6s var(--ease-luxury);
+    }
+
+    .nav.scrolled {
+      background: rgba(5, 5, 5, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1rem 3rem;
+      border-bottom: 1px solid rgba(196, 162, 101, 0.1);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .nav-logo-kanji {
+      font-family: var(--font-jp);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    .nav-logo-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--gold-dim);
+    }
+
+    .nav-logo-en {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--silver);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: color 0.4s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.4s var(--ease-luxury);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-reserve {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 0.7rem 2rem;
+      text-decoration: none;
+      transition: all 0.4s var(--ease-luxury);
+    }
+
+    .nav-reserve:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* ── Mobile Menu ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1001;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--white);
+      transition: all 0.4s var(--ease-luxury);
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.25) saturate(0.6);
+      transform: scale(1.05);
+      transition: transform 20s linear;
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(196, 162, 101, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(139, 115, 85, 0.05) 0%, transparent 50%),
+        linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.1) 40%, rgba(5,5,5,0.6) 100%);
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-vertical-text {
+      position: absolute;
+      left: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: var(--font-jp);
+      font-size: 0.85rem;
+      font-weight: 200;
+      color: rgba(196, 162, 101, 0.25);
+      letter-spacing: 0.8em;
+      line-height: 2;
+    }
+
+    .hero-vertical-right {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 200;
+      color: rgba(255, 255, 255, 0.15);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-kanji {
+      font-family: var(--font-jp);
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 200;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.2s var(--ease-dramatic) 0.5s forwards;
+      line-height: 1.1;
+    }
+
+    .hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2rem auto;
+      opacity: 0;
+      transform: scaleX(0);
+      animation: lineReveal 1s var(--ease-luxury) 1s forwards;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 2vw, 1.3rem);
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s var(--ease-dramatic) 1.3s forwards;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.15em;
+      color: var(--silver);
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s var(--ease-dramatic) 1.6s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-dramatic) 2s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.55rem;
+      font-weight: 200;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      transform-origin: top;
+      animation: scrollPulse 2s var(--ease-luxury) infinite;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes lineReveal {
+      to { opacity: 1; transform: scaleX(1); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── Section Utilities ── */
+    .section {
+      padding: 8rem 3rem;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .section-title-jp {
+      font-family: var(--font-jp);
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      font-weight: 200;
+      color: var(--stone);
+      margin-top: 0.5rem;
+      letter-spacing: 0.2em;
+    }
+
+    .gold-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold-dim);
+      margin: 2.5rem 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.9s var(--ease-dramatic), transform 0.9s var(--ease-dramatic);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Philosophy Section ── */
+    .philosophy {
+      background: var(--black-rich);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .philosophy-text p {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      font-weight: 300;
+      line-height: 2;
+      color: var(--mist);
+      margin-bottom: 1.5rem;
+    }
+
+    .philosophy-visual {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .philosophy-circle {
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(196, 162, 101, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .philosophy-circle::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(196, 162, 101, 0.08);
+      border-radius: 50%;
+    }
+
+    .philosophy-kanji {
+      font-family: var(--font-jp);
+      font-size: 5rem;
+      font-weight: 200;
+      color: var(--white);
+      letter-spacing: 0.1em;
+    }
+
+    .philosophy-orbit {
+      position: absolute;
+      inset: -30px;
+      border: 1px solid rgba(196, 162, 101, 0.06);
+      border-radius: 50%;
+      animation: slowSpin 40s linear infinite;
+    }
+
+    .philosophy-orbit::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: var(--gold-dim);
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes slowSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Cuisine Section (updated with photos) ── */
+    .cuisine {
+      background: var(--black);
+    }
+
+    .cuisine-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .cuisine-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .cuisine-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: var(--charcoal);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .cuisine-card-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1.2s var(--ease-luxury), filter 0.8s;
+      filter: brightness(0.5) saturate(0.7);
+    }
+
+    .cuisine-card:hover .cuisine-card-img {
+      transform: scale(1.08);
+      filter: brightness(0.7) saturate(0.9);
+    }
+
+    .cuisine-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem;
+      background: linear-gradient(to top, rgba(5, 5, 5, 0.9) 0%, transparent 100%);
+      z-index: 2;
+    }
+
+    .cuisine-card-label {
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .cuisine-card-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .cuisine-card-jp {
+      font-family: var(--font-jp);
+      font-size: 0.8rem;
+      font-weight: 200;
+      color: var(--stone);
+    }
+
+    /* ── Signature Dishes Gallery ── */
+    .signatures {
+      background: var(--black-rich);
+      padding: 8rem 0;
+      overflow: hidden;
+    }
+
+    .signatures-header {
+      text-align: center;
+      padding: 0 3rem;
+      margin-bottom: 5rem;
+    }
+
+    .signatures-header .section-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--silver);
+      max-width: 600px;
+      margin: 1.5rem auto 0;
+      line-height: 1.8;
+    }
+
+    .sig-scroll {
+      display: flex;
+      gap: 24px;
+      padding: 0 3rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+    }
+
+    .sig-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sig-card {
+      flex: 0 0 380px;
+      scroll-snap-align: start;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .sig-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85) saturate(0.9);
+      transition: transform 1s var(--ease-luxury), filter 0.6s;
+    }
+
+    .sig-card:hover .sig-card-img {
+      transform: scale(1.05);
+      filter: brightness(1) saturate(1);
+    }
+
+    .sig-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.6) 50%, transparent 100%);
+    }
+
+    .sig-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 1px;
+      margin-bottom: 8px;
+      font-family: var(--font-body);
+    }
+
+    .sig-badge.new {
+      background: var(--vermillion);
+      color: var(--white);
+    }
+
+    .sig-badge.classic {
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+    }
+
+    .sig-card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .sig-card-jp {
+      font-family: var(--font-jp);
+      font-size: 0.75rem;
+      font-weight: 200;
+      color: var(--gold-dim);
+      margin-bottom: 6px;
+    }
+
+    .sig-card-tagline {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    .sig-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      padding: 0 3rem;
+    }
+
+    .sig-nav-btn {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--ash);
+      background: transparent;
+      color: var(--silver);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s var(--ease-luxury);
+    }
+
+    .sig-nav-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .sig-nav-count {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 200;
+      color: var(--stone);
+      letter-spacing: 0.2em;
+    }
+
+    /* ── Omakase Experience ── */
+    .omakase {
+      background: var(--black);
+      text-align: center;
+      padding: 10rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .omakase::before {
+      content: '懐石';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-jp);
+      font-size: clamp(8rem, 25vw, 20rem);
+      font-weight: 200;
+      color: rgba(196, 162, 101, 0.03);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .omakase-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .omakase-price {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 3rem;
+    }
+
+    .omakase-desc {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      line-height: 2;
+      color: var(--silver);
+      margin-top: 2rem;
+    }
+
+    .omakase-courses {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .omakase-course {
+      text-align: center;
+    }
+
+    .omakase-course-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--white);
+    }
+
+    .omakase-course-label {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-top: 0.3rem;
+    }
+
+    .omakase-cta {
+      display: inline-block;
+      margin-top: 3.5rem;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold-dim);
+      padding: 1rem 3rem;
+      transition: all 0.5s var(--ease-luxury);
+    }
+
+    .omakase-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+      letter-spacing: 0.45em;
+    }
+
+    /* ── Featured Dishes (Full-width alternating) ── */
+    .featured {
+      background: var(--black);
+    }
+
+    .featured-header {
+      text-align: center;
+      padding: 8rem 3rem 5rem;
+    }
+
+    .feat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+      position: relative;
+    }
+
+    .feat-row:nth-child(odd) .feat-image { order: 1; }
+    .feat-row:nth-child(odd) .feat-text { order: 2; }
+    .feat-row:nth-child(even) .feat-image { order: 2; }
+    .feat-row:nth-child(even) .feat-text { order: 1; }
+
+    .feat-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feat-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85) saturate(0.9);
+      transition: transform 1.5s var(--ease-luxury);
+    }
+
+    .feat-row:hover .feat-image img {
+      transform: scale(1.03);
+    }
+
+    .feat-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem;
+      background: var(--black-rich);
+    }
+
+    .feat-cat {
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1rem;
+    }
+
+    .feat-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.3rem;
+    }
+
+    .feat-jp {
+      font-family: var(--font-jp);
+      font-size: 0.9rem;
+      font-weight: 200;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.15em;
+    }
+
+    .feat-tagline {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .feat-desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 200;
+      color: var(--stone);
+      line-height: 1.8;
+    }
+
+    .feat-divider {
+      width: 30px;
+      height: 1px;
+      background: var(--gold-dim);
+      margin: 1.5rem 0;
+    }
+
+    /* ── Menu Section ── */
+    .menu {
+      background: var(--black);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 4rem;
+      margin-top: 4rem;
+      max-width: 900px;
+    }
+
+    .menu-divider-v {
+      background: rgba(196, 162, 101, 0.1);
+    }
+
+    .menu-category-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .menu-category-jp {
+      font-family: var(--font-jp);
+      font-size: 0.75rem;
+      font-weight: 200;
+      color: var(--gold-dim);
+      margin-bottom: 2rem;
+    }
+
+    .menu-item {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .menu-item-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .menu-item-jp {
+      font-family: var(--font-jp);
+      font-size: 0.65rem;
+      font-weight: 200;
+      color: var(--gold-dim);
+    }
+
+    .menu-item-desc {
+      font-size: 0.75rem;
+      font-weight: 200;
+      color: var(--stone);
+      margin-top: 0.3rem;
+      line-height: 1.6;
+    }
+
+    /* ── Ambiance Section ── */
+    .ambiance {
+      background: var(--black-rich);
+      padding: 0;
+    }
+
+    .ambiance-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+    }
+
+    .ambiance-text {
+      padding: 8rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .ambiance-text p {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 2;
+      color: var(--silver);
+      margin-bottom: 1.5rem;
+    }
+
+    .ambiance-visual {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ambiance-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/ambiance-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.45) saturate(0.7);
+      transition: transform 1.5s var(--ease-luxury);
+    }
+
+    .ambiance-visual:hover .ambiance-img {
+      transform: scale(1.03);
+    }
+
+    /* ── Reservation / Contact ── */
+    .reservation {
+      background: var(--black);
+      text-align: center;
+      padding: 10rem 3rem;
+      position: relative;
+    }
+
+    .reservation::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim));
+    }
+
+    .reservation-subtitle {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--silver);
+      margin-top: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .reservation-info {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .reservation-info-item {
+      text-align: center;
+    }
+
+    .reservation-info-label {
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.8rem;
+    }
+
+    .reservation-info-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.8;
+    }
+
+    .reservation-cta {
+      display: inline-block;
+      margin-top: 4rem;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 1.1rem 3.5rem;
+      text-decoration: none;
+      transition: all 0.5s var(--ease-luxury);
+    }
+
+    .reservation-cta:hover {
+      background: var(--gold-light);
+      letter-spacing: 0.45em;
+      box-shadow: 0 0 40px rgba(196, 162, 101, 0.15);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--black-rich);
+      border-top: 1px solid rgba(196, 162, 101, 0.06);
+      padding: 4rem 3rem 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-jp);
+      font-size: 1.8rem;
+      font-weight: 200;
+      color: var(--white);
+      letter-spacing: 0.2em;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--stone);
+      letter-spacing: 0.15em;
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-nav a {
+      font-size: 0.7rem;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--gold);
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-contact-label {
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-contact-value {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--silver);
+      line-height: 1.8;
+    }
+
+    .footer-contact-value a {
+      color: var(--silver);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-contact-value a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .footer-copy {
+      font-size: 0.6rem;
+      font-weight: 200;
+      color: var(--ash);
+      letter-spacing: 0.15em;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-social a {
+      font-size: 0.6rem;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ash);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-social a:hover {
+      color: var(--gold);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .philosophy {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .philosophy-visual {
+        height: 350px;
+      }
+
+      .cuisine-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ambiance-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .ambiance-visual {
+        min-height: 50vh;
+      }
+
+      .ambiance-text {
+        padding: 5rem 3rem;
+      }
+
+      .feat-row {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .feat-row:nth-child(odd) .feat-image,
+      .feat-row:nth-child(even) .feat-image { order: 1; }
+      .feat-row:nth-child(odd) .feat-text,
+      .feat-row:nth-child(even) .feat-text { order: 2; }
+
+      .feat-image { min-height: 50vh; }
+      .feat-text { padding: 4rem 3rem; }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-right {
+        text-align: center;
+      }
+
+      .sig-card {
+        flex: 0 0 320px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 5rem 1.5rem;
+      }
+
+      .nav-links, .nav-reserve {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav {
+        padding: 1.2rem 1.5rem;
+      }
+
+      .hero-vertical-text,
+      .hero-vertical-right {
+        display: none;
+      }
+
+      .cuisine-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .menu-divider-v {
+        display: none;
+      }
+
+      .omakase-courses {
+        gap: 2rem;
+      }
+
+      .reservation-info {
+        gap: 2.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .sig-card {
+        flex: 0 0 280px;
+      }
+
+      .sig-scroll {
+        padding: 0 1.5rem;
+      }
+
+      .feat-text {
+        padding: 3rem 1.5rem;
+      }
+
+      /* Mobile menu overlay */
+      .mobile-menu {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 5, 5, 0.97);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s var(--ease-luxury);
+      }
+
+      .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu a {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 300;
+        letter-spacing: 0.2em;
+        color: var(--white);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.3s;
+      }
+
+      .mobile-menu a:hover {
+        color: var(--gold);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-kanji {
+        font-size: 3.5rem;
+      }
+
+      .philosophy-circle {
+        width: 240px;
+        height: 240px;
+      }
+
+      .philosophy-kanji {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* ── Decorative line ── */
+    .deco-line {
+      position: absolute;
+      width: 1px;
+      background: rgba(196, 162, 101, 0.05);
+    }
+
+    /* ── Mobile Menu (hidden globally, shown via media query) ── */
+    .mobile-menu {
+      display: none;
+    }
+
+    /* ── FAQ Section ── */
+    .faq {
+      background: var(--black-rich);
+    }
+
+    .faq-list {
+      max-width: 820px;
+      margin-top: 4rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(196, 162, 101, 0.1);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.8rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+      gap: 2rem;
+    }
+
+    .faq-question-text {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      font-weight: 300;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      color: var(--gold-dim);
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--gold-dim);
+      transition: transform 0.4s var(--ease-luxury), opacity 0.4s;
+    }
+
+    .faq-icon::before {
+      width: 1px;
+      height: 14px;
+      top: 3px;
+      left: 9.5px;
+    }
+
+    .faq-icon::after {
+      width: 14px;
+      height: 1px;
+      top: 9.5px;
+      left: 3px;
+    }
+
+    .faq-item.open .faq-icon::before {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s var(--ease-luxury);
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+    }
+
+    .faq-answer-inner {
+      padding-bottom: 1.8rem;
+    }
+
+    .faq-answer-inner p {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 2;
+      color: var(--silver);
+    }
+  </style>
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "@id": "https://www.muisupperclub.com/#restaurant",
+      "name": "MUI Supper Club",
+      "alternateName": ["MUI", "MUI \u7121\u70ba", "MUI Japanese Restaurant"],
+      "description": "MUI Supper Club is a haute Japanese restaurant at Pike & Rose in North Bethesda, Maryland, offering A5 wagyu, omakase, robata grill, signature sushi rolls, and theatrical tableside dining experiences. The restaurant draws from the Daoist philosophy of Wu Wei (effortless action) and blends traditional Japanese techniques with modern innovation.",
+      "url": "https://www.muisupperclub.com/",
+      "telephone": "",
+      "email": "mui.modern.japanese@gmail.com",
+      "image": [
+        "https://www.muisupperclub.com/images/hero-bg.jpg",
+        "https://www.muisupperclub.com/images/eternal-flame.jpg",
+        "https://www.muisupperclub.com/images/oceans-treasure.jpg",
+        "https://www.muisupperclub.com/images/phoenix-egg.jpg"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11830 Grand Park Ave",
+        "addressLocality": "North Bethesda",
+        "addressRegion": "MD",
+        "postalCode": "20852",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.0284,
+        "longitude": -77.1128
+      },
+      "areaServed": [
+        {"@type": "City", "name": "North Bethesda", "containedIn": "Maryland"},
+        {"@type": "City", "name": "Bethesda", "containedIn": "Maryland"},
+        {"@type": "City", "name": "Rockville", "containedIn": "Maryland"},
+        {"@type": "City", "name": "Washington", "containedIn": "District of Columbia"},
+        {"@type": "State", "name": "Maryland"},
+        {"@type": "State", "name": "Virginia"}
+      ],
+      "servesCuisine": ["Japanese", "Omakase", "Robata", "Sushi", "Wagyu"],
+      "priceRange": "$$$$",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Cash, Credit Card",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "18:00",
+          "closes": "23:00"
+        }
+      ],
+      "acceptsReservations": "True",
+      "hasMenu": {
+        "@type": "Menu",
+        "@id": "https://www.muisupperclub.com/#menu",
+        "name": "MUI Signature Menu",
+        "description": "Twenty extraordinary dishes that define the MUI experience — A5 wagyu, omakase sashimi, robata grill, signature rolls, craft cocktails, and theatrical desserts.",
+        "hasMenuSection": [
+          {
+            "@type": "MenuSection",
+            "name": "Cold Tastings",
+            "description": "Artfully composed cold appetizers featuring aged fish, A5 wagyu, and interactive tableside presentations",
+            "hasMenuItem": [
+              {"@type": "MenuItem", "name": "Jukusei Toro Jewel Box", "description": "30-day aged otoro on frozen Himalayan salt block with dry ice, gold leaf, and finger lime pearls"},
+              {"@type": "MenuItem", "name": "Crystal Seafood Terrarium", "description": "Dashi gel\u00e9e sphere with uni, ikura, snow crab, and edible flowers, cracked tableside"},
+              {"@type": "MenuItem", "name": "The Golden Spoon", "description": "A5 wagyu tartare, Kaluga caviar, quail egg yolk sphere, and micro shiso on a golden spoon"},
+              {"@type": "MenuItem", "name": "Sakura Smoke Garden", "description": "Cherry blossom-cured A5 wagyu tataki rose on volcanic stone, smoke cloche reveal"}
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Hot Tastings",
+            "description": "Tableside theater meets Japanese technique — fire, smoke, and sizzling binchotan",
+            "hasMenuItem": [
+              {"@type": "MenuItem", "name": "Phoenix Egg", "description": "Gold-leafed sphere with foie gras, black truffle, and dashi, torched tableside"},
+              {"@type": "MenuItem", "name": "Wagyu Niku Kappo", "description": "A5 wagyu cubes seared on tabletop binchotan stone with seven artisanal dipping sauces"},
+              {"@type": "MenuItem", "name": "Smoke & Fire Gyoza", "description": "Wagyu-truffle gyoza with glass-crisp lattice bottom, smoke dome, and black garlic ponzu"},
+              {"@type": "MenuItem", "name": "Golden Seiro Tower", "description": "Three-tier golden bamboo steamer with lobster shumai, truffle chawanmushi, and seasonal yuba"}
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Main Courses",
+            "description": "Center-of-plate spectacles featuring A5 wagyu, whole lobster, and omakase-style presentations",
+            "hasMenuItem": [
+              {"@type": "MenuItem", "name": "The Eternal Flame", "description": "72-hour koji-aged A5 wagyu tomahawk finished with wara-yaki rice straw fire, carved tableside"},
+              {"@type": "MenuItem", "name": "Ocean's Treasure Chest", "description": "Locked wooden chest with dry ice, revealing seasonal omakase platter of otoro, uni, and botan ebi"},
+              {"@type": "MenuItem", "name": "Rebirth of the Dragon", "description": "Whole Maine lobster in dragon ceramic vessel with sake blue flame and miso-yuzu glaze"},
+              {"@type": "MenuItem", "name": "MUI Tomahawk", "description": "40oz A5 wagyu tomahawk, binchotan charcoal grilled, with bone marrow and truffle jus"},
+              {"@type": "MenuItem", "name": "Hot Rock Experience", "description": "700\u00b0F volcanic stone with A5 wagyu, otoro, jumbo prawn, and foie gras, cook at your table"}
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Desserts",
+            "hasMenuItem": [
+              {"@type": "MenuItem", "name": "The Smoke Sphere", "description": "Dark chocolate sphere with yuzu cr\u00e8me, matcha, and hojicha caramel poured tableside"},
+              {"@type": "MenuItem", "name": "Matcha Lava Cake", "description": "Molten matcha center, black sesame ice cream, kinako crumble, edible flowers"}
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Cocktails",
+            "hasMenuItem": [
+              {"@type": "MenuItem", "name": "Dragon's Breath", "description": "Hibiki whisky, activated charcoal, dragon fruit, yuzu, served in dragon goblet with dry ice"}
+            ]
+          }
+        ]
+      },
+      "knowsAbout": ["Japanese cuisine", "omakase", "A5 wagyu", "robata grill", "sushi", "binchotan charcoal", "wara-yaki", "koji aging", "kaiseki"],
+      "slogan": "Where Fire Meets the Sea",
+      "keywords": "Japanese restaurant, omakase, A5 wagyu, robata, sushi, North Bethesda, Pike and Rose, DMV fine dining, best Japanese restaurant DC area, luxury dining Maryland"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What kind of restaurant is MUI Supper Club?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MUI Supper Club is a haute Japanese restaurant in North Bethesda, Maryland, at Pike & Rose. We specialize in A5 wagyu, omakase, robata grill, and theatrical tableside dining experiences. Our cuisine blends traditional Japanese techniques with modern innovation, guided by the Daoist philosophy of Wu Wei — effortless action."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is MUI Supper Club located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MUI Supper Club is located at 11830 Grand Park Ave, North Bethesda, MD 20852, in the Pike & Rose mixed-use development. We are easily accessible from Bethesda, Rockville, Washington DC, and the greater DMV area."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are MUI Supper Club's hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MUI Supper Club is open Tuesday through Saturday from 6:00 PM to 11:00 PM. We are closed on Sundays and Mondays."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does MUI offer omakase dining?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. MUI features an intimate 6-seat omakase counter where our chef presents a 12-course seasonal tasting menu over approximately 3 hours. The omakase experience follows the rhythm of the seasons, with each plate a dialogue between tradition and the unexpected. Reservations are required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are MUI's signature dishes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MUI's signature dishes include The Eternal Flame (72-hour koji-aged A5 wagyu tomahawk with wara-yaki fire), Ocean's Treasure Chest (a locked wooden chest revealing an omakase seafood platter), Phoenix Egg (a gold-leafed sphere torched tableside), The Golden Spoon (A5 wagyu tartare with Kaluga caviar), and Black Dragon Roll (tempura lobster with torched A5 wagyu). All feature theatrical tableside presentations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make a reservation at MUI Supper Club?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reservations can be made by emailing mui.modern.japanese@gmail.com. We recommend reserving in advance, especially for weekend evenings and the omakase counter, which has only 6 seats."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is MUI the best Japanese restaurant in the DMV area?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MUI Supper Club offers the DMV's most exclusive Japanese dining experience, combining A5 Miyazaki wagyu, Toyosu Market seafood, omakase, and robata grill with theatrical tableside presentations. Located at Pike & Rose in North Bethesda, MD, MUI serves the Washington DC, Maryland, and Virginia metro area with haute Japanese cuisine that rivals the finest restaurants in New York and Tokyo."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "MUI Supper Club",
+      "url": "https://www.muisupperclub.com/",
+      "description": "Official website of MUI Supper Club — Haute Japanese cuisine at Pike & Rose, North Bethesda, Maryland.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "MUI Supper Club",
+        "url": "https://www.muisupperclub.com/"
+      }
+    }
+  ]
+  </script>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-text">無為</div>
+    <div class="preloader-line"></div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#philosophy" onclick="closeMobileMenu()">Philosophy</a>
+    <a href="#cuisine" onclick="closeMobileMenu()">Cuisine</a>
+    <a href="#signatures" onclick="closeMobileMenu()">Signatures</a>
+    <a href="#omakase" onclick="closeMobileMenu()">Omakase</a>
+    <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#reservation" onclick="closeMobileMenu()">Reserve</a>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="banner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-kanji">無為</span>
+      <span class="nav-logo-divider"></span>
+      <span class="nav-logo-en">Mui</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#cuisine">Cuisine</a></li>
+      <li><a href="#signatures">Signatures</a></li>
+      <li><a href="#omakase">Omakase</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#reservation" class="nav-reserve">Reserve</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <main role="main">
+  <header class="hero" role="banner" aria-label="MUI Supper Club — Haute Japanese Cuisine">
+    <div class="hero-bg"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-vertical-text">高級な料理を選びます</div>
+    <div class="hero-vertical-right">Haute Japanese Cuisine</div>
+    <div class="hero-content">
+      <h1 class="hero-kanji">無為</h1>
+      <div class="hero-line"></div>
+      <p class="hero-subtitle">Haute Japanese Cuisine</p>
+      <p class="hero-tagline">Where Fire Meets the Sea</p>
+    </div>
+    <div class="hero-scroll">
+      <span>Discover</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- Philosophy -->
+  <section class="section philosophy" id="philosophy" aria-label="Philosophy">
+    <div class="philosophy-text reveal">
+      <span class="section-label">Our Philosophy</span>
+      <h2 class="section-title">The Art of<br>Effortless Action</h2>
+      <p class="section-title-jp">無為自然</p>
+      <div class="gold-divider"></div>
+      <p>MUI draws its essence from Wu Wei — the Daoist principle of effortless action. Acting in accordance with the natural flow, allowing each ingredient to reveal its purest form without force or artifice.</p>
+      <p>Our cuisine embodies this philosophy: traditional Japanese techniques refined through generations, meeting modern innovation with grace. Every dish is a meditation on restraint and intention.</p>
+    </div>
+    <div class="philosophy-visual reveal">
+      <div class="philosophy-circle">
+        <div class="philosophy-orbit"></div>
+        <span class="philosophy-kanji">無為</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cuisine -->
+  <section class="section cuisine" id="cuisine" aria-label="Cuisine">
+    <div class="cuisine-header reveal">
+      <span class="section-label">Our Craft</span>
+      <h2 class="section-title">Exquisite Cuisine</h2>
+      <p class="section-title-jp">料理の芸術</p>
+    </div>
+    <div class="cuisine-grid">
+      <div class="cuisine-card reveal">
+        <div class="cuisine-card-img" style="background-image: url('images/sashimi-omakase.jpg');" role="img" aria-label="Chef's sashimi omakase platter with Toyosu Market fish at MUI Supper Club"></div>
+        <div class="cuisine-card-content">
+          <span class="cuisine-card-label">From The Sea</span>
+          <h3 class="cuisine-card-title">Edomae Sushi &amp; Sashimi</h3>
+          <p class="cuisine-card-jp">江戸前寿司・刺身</p>
+        </div>
+      </div>
+      <div class="cuisine-card reveal">
+        <div class="cuisine-card-img" style="background-image: url('images/eternal-flame.jpg');" role="img" aria-label="Robata grilled A5 wagyu over binchotan charcoal at MUI Japanese restaurant"></div>
+        <div class="cuisine-card-content">
+          <span class="cuisine-card-label">Over Flame</span>
+          <h3 class="cuisine-card-title">Robata &amp; Wagyu</h3>
+          <p class="cuisine-card-jp">炉端焼き・和牛</p>
+        </div>
+      </div>
+      <div class="cuisine-card reveal">
+        <div class="cuisine-card-img" style="background-image: url('images/dragons-breath.jpg');" role="img" aria-label="Dragon's Breath craft cocktail with dry ice in dragon goblet at MUI bar"></div>
+        <div class="cuisine-card-content">
+          <span class="cuisine-card-label">The Bar</span>
+          <h3 class="cuisine-card-title">Cocktails &amp; Spirits</h3>
+          <p class="cuisine-card-jp">カクテル・蒸留酒</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Dishes Horizontal Scroll -->
+  <section class="signatures" id="signatures" aria-label="Signature dishes">
+    <div class="signatures-header reveal">
+      <span class="section-label">The Collection</span>
+      <h2 class="section-title">Signature Creations</h2>
+      <p class="section-title-jp">特選コレクション</p>
+      <p class="section-subtitle">Twenty extraordinary dishes that define the MUI experience. Each creation is a convergence of Japanese mastery and theatrical artistry.</p>
+    </div>
+    <div class="sig-scroll" id="sigScroll">
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/jukusei-toro.jpg" alt="Jukusei Toro Jewel Box — 30-day aged otoro on Himalayan salt with dry ice at MUI" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Jukusei Toro Jewel Box</h3>
+          <p class="sig-card-jp">熟成トロ宝石箱</p>
+          <p class="sig-card-tagline">Aged to perfection. Unveiled in a cloud.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/sakura-smoke.jpg" alt="Sakura Smoke Garden — cherry blossom-cured A5 wagyu tataki rose at MUI Supper Club" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Sakura Smoke Garden</h3>
+          <p class="sig-card-jp">桜スモークガーデン</p>
+          <p class="sig-card-tagline">A garden that blooms in smoke.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/crystal-terrarium.jpg" alt="Crystal Seafood Terrarium — dashi gelée sphere with uni and ikura cracked tableside" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Crystal Seafood Terrarium</h3>
+          <p class="sig-card-jp">水晶シーフードテラリウム</p>
+          <p class="sig-card-tagline">The ocean, captured in crystal.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/wagyu-niku-kappo.jpg" alt="Wagyu Niku Kappo — A5 cubes on binchotan stone with seven dipping sauces" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Wagyu Niku Kappo</h3>
+          <p class="sig-card-jp">和牛肉割烹</p>
+          <p class="sig-card-tagline">Seven paths to wagyu perfection.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/golden-seiro.jpg" alt="Golden Seiro Tower — three-tier bamboo steamer with lobster and truffle" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Golden Seiro Tower</h3>
+          <p class="sig-card-jp">黄金せいろタワー</p>
+          <p class="sig-card-tagline">Three tiers. Three revelations.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/phoenix-egg.jpg" alt="Phoenix Egg — gold-leafed sphere torched tableside revealing foie gras and truffle" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Phoenix Egg</h3>
+          <p class="sig-card-jp">不死鳥の卵</p>
+          <p class="sig-card-tagline">From fire, reborn.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/eternal-flame.jpg" alt="The Eternal Flame — 72-hour koji-aged A5 wagyu tomahawk with wara-yaki fire" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">The Eternal Flame</h3>
+          <p class="sig-card-jp">永遠の炎</p>
+          <p class="sig-card-tagline">72 hours of patience. One moment of fire.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/oceans-treasure.jpg" alt="Ocean's Treasure Chest — locked wooden chest with dry ice revealing omakase platter" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Ocean's Treasure Chest</h3>
+          <p class="sig-card-jp">海の宝箱</p>
+          <p class="sig-card-tagline">Your key to the sea's finest secrets.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/rebirth-dragon.jpg" alt="Rebirth of the Dragon — whole lobster in dragon vessel with sake blue flame" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge new">New</span>
+          <h3 class="sig-card-name">Rebirth of the Dragon</h3>
+          <p class="sig-card-jp">龍の再生</p>
+          <p class="sig-card-tagline">Where legend meets the flame.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/golden-spoon.jpg" alt="The Golden Spoon — A5 wagyu tartare with Kaluga caviar on a golden spoon" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">The Golden Spoon</h3>
+          <p class="sig-card-jp">黄金のスプーン</p>
+          <p class="sig-card-tagline">The first bite tells the whole story.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/smoke-fire-gyoza.jpg" alt="Smoke and Fire Gyoza — wagyu-truffle gyoza under smoke dome at MUI" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Smoke &amp; Fire Gyoza</h3>
+          <p class="sig-card-jp">燻製焼き餃子</p>
+          <p class="sig-card-tagline">Fire on the bottom. Smoke on top.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/black-dragon.jpg" alt="Black Dragon Roll — tempura lobster with torched A5 wagyu and gold leaf" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Black Dragon Roll</h3>
+          <p class="sig-card-jp">黒龍巻</p>
+          <p class="sig-card-tagline">Darkness has never tasted so good.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/mui-tomahawk.jpg" alt="MUI Tomahawk — 40oz A5 wagyu tomahawk carved tableside at MUI Supper Club" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">MUI Tomahawk</h3>
+          <p class="sig-card-jp">MUIトマホーク</p>
+          <p class="sig-card-tagline">The throne of Japanese beef.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/hot-rock.jpg" alt="Hot Rock Experience — searing volcanic stone with A5 wagyu, otoro, and prawn" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Hot Rock Experience</h3>
+          <p class="sig-card-jp">焼石体験</p>
+          <p class="sig-card-tagline">Your stone. Your fire. Your way.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/lobster-dynamite.jpg" alt="Lobster Dynamite — half Maine lobster with dynamite sauce and uni butter" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Lobster Dynamite</h3>
+          <p class="sig-card-jp">ロブスターダイナマイト</p>
+          <p class="sig-card-tagline">Lobster, lit.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/golden-phoenix.jpg" alt="Golden Phoenix Roll — king crab tempura with torched salmon belly and gold leaf" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Golden Phoenix Roll</h3>
+          <p class="sig-card-jp">黄金の鳳凰巻</p>
+          <p class="sig-card-tagline">Every roll tells a story. This one glows.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/sashimi-omakase.jpg" alt="Chef's sashimi omakase platter with Toyosu Market fish at MUI Supper Club" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Chef's Sashimi Omakase</h3>
+          <p class="sig-card-jp">おまかせ刺身盛り合わせ</p>
+          <p class="sig-card-tagline">Trust the chef. Taste the ocean.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/smoke-sphere.jpg" alt="The Smoke Sphere — dark chocolate sphere with yuzu crème melted tableside" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">The Smoke Sphere</h3>
+          <p class="sig-card-jp">煙の球体</p>
+          <p class="sig-card-tagline">The grand finale, in a single sphere.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/matcha-lava.jpg" alt="Matcha Lava Cake — molten matcha center with black sesame ice cream" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Matcha Lava Cake</h3>
+          <p class="sig-card-jp">抹茶溶岩ケーキ</p>
+          <p class="sig-card-tagline">Cut. Watch. Indulge.</p>
+        </div>
+      </div>
+
+      <div class="sig-card reveal">
+        <img class="sig-card-img" src="images/dragons-breath.jpg" alt="Dragon's Breath craft cocktail with dry ice in dragon goblet at MUI bar" loading="lazy">
+        <div class="sig-card-overlay">
+          <span class="sig-badge classic">Signature</span>
+          <h3 class="sig-card-name">Dragon's Breath</h3>
+          <p class="sig-card-jp">龍の息吹</p>
+          <p class="sig-card-tagline">Drink the fire. Breathe the smoke.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="sig-nav">
+      <button class="sig-nav-btn" onclick="scrollSig(-1)" aria-label="Previous">&#8592;</button>
+      <span class="sig-nav-count">20 Creations</span>
+      <button class="sig-nav-btn" onclick="scrollSig(1)" aria-label="Next">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- Omakase -->
+  <section class="section omakase" id="omakase" aria-label="Omakase experience">
+    <div class="omakase-content reveal">
+      <span class="section-label">The Experience</span>
+      <h2 class="section-title">Omakase</h2>
+      <p class="section-title-jp">おまかせ — 「お任せします」</p>
+      <div class="gold-divider" style="margin: 2.5rem auto;"></div>
+      <p class="omakase-desc">Surrender to the artistry of our chef. A multi-course journey that follows the rhythm of the seasons, each plate a dialogue between tradition and the unexpected.</p>
+      <div class="omakase-courses">
+        <div class="omakase-course">
+          <span class="omakase-course-num">12</span>
+          <p class="omakase-course-label">Courses</p>
+        </div>
+        <div class="omakase-course">
+          <span class="omakase-course-num">3</span>
+          <p class="omakase-course-label">Hours</p>
+        </div>
+        <div class="omakase-course">
+          <span class="omakase-course-num">6</span>
+          <p class="omakase-course-label">Seats</p>
+        </div>
+      </div>
+      <a href="#reservation" class="omakase-cta">Reserve Your Seat</a>
+    </div>
+  </section>
+
+  <!-- Featured Dishes (full-width alternating) -->
+  <section class="featured" id="featured" aria-label="Featured dishes">
+    <div class="featured-header reveal">
+      <span class="section-label">Closer Look</span>
+      <h2 class="section-title">The Experience, Up Close</h2>
+      <p class="section-title-jp">体験をもっと近くに</p>
+    </div>
+
+    <div class="feat-row reveal">
+      <div class="feat-image">
+        <img src="images/eternal-flame.jpg" alt="The Eternal Flame — 72-hour koji-aged A5 wagyu tomahawk with wara-yaki fire" loading="lazy">
+      </div>
+      <div class="feat-text">
+        <p class="feat-cat">New Signature &middot; Main Course</p>
+        <h3 class="feat-name">The Eternal Flame</h3>
+        <p class="feat-jp">永遠の炎</p>
+        <p class="feat-tagline">72 hours of patience. One moment of fire.</p>
+        <div class="feat-divider"></div>
+        <p class="feat-desc">72-hour koji-aged A5 wagyu tomahawk, finished with wara-yaki rice straw fire for a primal, smoky crust. Carved tableside on a heated obsidian slab, the bone stands upright like a monument to Japanese fire mastery.</p>
+      </div>
+    </div>
+
+    <div class="feat-row reveal">
+      <div class="feat-image">
+        <img src="images/oceans-treasure.jpg" alt="Ocean's Treasure Chest — locked wooden chest with dry ice revealing omakase platter" loading="lazy">
+      </div>
+      <div class="feat-text">
+        <p class="feat-cat">New Signature &middot; Main Course</p>
+        <h3 class="feat-name">Ocean's Treasure Chest</h3>
+        <p class="feat-jp">海の宝箱</p>
+        <p class="feat-tagline">Your key to the sea's finest secrets.</p>
+        <div class="feat-divider"></div>
+        <p class="feat-desc">A locked wooden chest arrives shrouded in dry ice mist. The key is presented to the guest, and upon opening, the fog clears to reveal a curated omakase platter of the finest seasonal seafood — otoro, uni, botan ebi, and aburi selections.</p>
+      </div>
+    </div>
+
+    <div class="feat-row reveal">
+      <div class="feat-image">
+        <img src="images/phoenix-egg.jpg" alt="Phoenix Egg — gold-leafed sphere torched tableside revealing foie gras and truffle" loading="lazy">
+      </div>
+      <div class="feat-text">
+        <p class="feat-cat">New Signature &middot; Hot Appetizer</p>
+        <h3 class="feat-name">Phoenix Egg</h3>
+        <p class="feat-jp">不死鳥の卵</p>
+        <p class="feat-tagline">From fire, reborn.</p>
+        <div class="feat-divider"></div>
+        <p class="feat-desc">A gold-leafed sphere concealing foie gras mousse, black truffle, and rich dashi broth. Torched tableside with a flame that melts the delicate shell, revealing the molten treasure within.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="section menu" id="menu" aria-label="Menu">
+    <div class="reveal">
+      <span class="section-label">A Selection</span>
+      <h2 class="section-title">The Menu</h2>
+      <p class="section-title-jp">お品書き</p>
+    </div>
+    <div class="menu-grid reveal">
+      <div>
+        <h3 class="menu-category-title">Cold Tastings</h3>
+        <p class="menu-category-jp">冷菜</p>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Jukusei Toro Jewel Box</span>
+            <span class="menu-item-jp">熟成トロ宝石箱</span>
+          </div>
+          <p class="menu-item-desc">30-day aged otoro, Himalayan salt, dry ice, gold leaf, finger lime</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Crystal Seafood Terrarium</span>
+            <span class="menu-item-jp">水晶テラリウム</span>
+          </div>
+          <p class="menu-item-desc">Dashi gelée sphere, uni, ikura, snow crab, edible flowers</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">The Golden Spoon</span>
+            <span class="menu-item-jp">黄金のスプーン</span>
+          </div>
+          <p class="menu-item-desc">A5 wagyu tartare, Kaluga caviar, quail egg sphere</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Sakura Smoke Garden</span>
+            <span class="menu-item-jp">桜スモークガーデン</span>
+          </div>
+          <p class="menu-item-desc">Cherry blossom-cured A5 tataki rose, volcanic stone, smoke cloche</p>
+        </div>
+
+        <h3 class="menu-category-title" style="margin-top: 3rem;">Hot Tastings</h3>
+        <p class="menu-category-jp">温菜</p>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Phoenix Egg</span>
+            <span class="menu-item-jp">不死鳥の卵</span>
+          </div>
+          <p class="menu-item-desc">Gold-leafed sphere, foie gras, black truffle, dashi, torched tableside</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Wagyu Niku Kappo</span>
+            <span class="menu-item-jp">和牛肉割烹</span>
+          </div>
+          <p class="menu-item-desc">A5 cubes, tabletop binchotan stone, seven dipping sauces</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Smoke &amp; Fire Gyoza</span>
+            <span class="menu-item-jp">燻製焼き餃子</span>
+          </div>
+          <p class="menu-item-desc">Wagyu-truffle gyoza, glass-crisp lattice, smoke dome, black garlic ponzu</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Golden Seiro Tower</span>
+            <span class="menu-item-jp">黄金せいろタワー</span>
+          </div>
+          <p class="menu-item-desc">Three-tier steamer, lobster shumai, truffle chawanmushi, seasonal yuba</p>
+        </div>
+      </div>
+      <div class="menu-divider-v"></div>
+      <div>
+        <h3 class="menu-category-title">Main Courses</h3>
+        <p class="menu-category-jp">メイン</p>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">The Eternal Flame</span>
+            <span class="menu-item-jp">永遠の炎</span>
+          </div>
+          <p class="menu-item-desc">72-hour koji-aged A5 tomahawk, wara-yaki fire, bone marrow butter</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Ocean's Treasure Chest</span>
+            <span class="menu-item-jp">海の宝箱</span>
+          </div>
+          <p class="menu-item-desc">Locked chest, dry ice, seasonal omakase platter, otoro, uni, botan ebi</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Rebirth of the Dragon</span>
+            <span class="menu-item-jp">龍の再生</span>
+          </div>
+          <p class="menu-item-desc">Whole Maine lobster, dragon vessel, sake blue flame, miso-yuzu glaze</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">MUI Tomahawk</span>
+            <span class="menu-item-jp">MUIトマホーク</span>
+          </div>
+          <p class="menu-item-desc">40oz A5 wagyu, binchotan charcoal, bone marrow, truffle jus</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Hot Rock Experience</span>
+            <span class="menu-item-jp">焼石体験</span>
+          </div>
+          <p class="menu-item-desc">700°F volcanic stone, A5 wagyu, otoro, prawn, foie gras</p>
+        </div>
+
+        <h3 class="menu-category-title" style="margin-top: 3rem;">Desserts &amp; Cocktails</h3>
+        <p class="menu-category-jp">甘味・カクテル</p>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">The Smoke Sphere</span>
+            <span class="menu-item-jp">煙の球体</span>
+          </div>
+          <p class="menu-item-desc">Dark chocolate sphere, yuzu crème, matcha, hojicha caramel tableside</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Matcha Lava Cake</span>
+            <span class="menu-item-jp">抹茶溶岩ケーキ</span>
+          </div>
+          <p class="menu-item-desc">Molten matcha center, black sesame ice cream, kinako, edible flowers</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Dragon's Breath</span>
+            <span class="menu-item-jp">龍の息吹</span>
+          </div>
+          <p class="menu-item-desc">Hibiki whisky, charcoal, dragon fruit, yuzu, dry ice goblet</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ambiance -->
+  <section class="ambiance" id="ambiance" aria-label="Ambiance">
+    <div class="ambiance-inner">
+      <div class="ambiance-text reveal">
+        <span class="section-label">The Space</span>
+        <h2 class="section-title">An Atmosphere<br>of Quiet Luxury</h2>
+        <p class="section-title-jp">空間の美学</p>
+        <div class="gold-divider"></div>
+        <p>Raw wood, hand-forged steel, and soft ambient light converge in a space designed to sharpen the senses. Our interior pays homage to the Japanese concept of Ma — the beauty found in negative space.</p>
+        <p>An intimate DJ booth weaves understated beats through the evening, blending modern rhythm with the meditative calm of traditional Japanese aesthetics.</p>
+      </div>
+      <div class="ambiance-visual">
+        <div class="ambiance-img" role="img" aria-label="MUI Supper Club luxury dining atmosphere — dark Japanese aesthetic with ambient lighting"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq" aria-label="Frequently asked questions">
+    <div class="reveal">
+      <span class="section-label">Questions</span>
+      <h2 class="section-title">Frequently Asked</h2>
+      <p class="section-title-jp">よくあるご質問</p>
+    </div>
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-a1">
+          <span class="faq-question-text">What kind of restaurant is MUI?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" id="faq-a1" role="region">
+          <div class="faq-answer-inner">
+            <p>MUI Supper Club is a haute Japanese restaurant in North Bethesda, Maryland, at Pike &amp; Rose. We specialize in A5 wagyu, omakase, robata grill, and theatrical tableside dining experiences. Our cuisine blends traditional Japanese techniques with modern innovation, guided by the Daoist philosophy of Wu Wei &mdash; effortless action.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-a2">
+          <span class="faq-question-text">Where is MUI located?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" id="faq-a2" role="region">
+          <div class="faq-answer-inner">
+            <p>MUI Supper Club is located at 11830 Grand Park Ave, North Bethesda, MD 20852, in the Pike &amp; Rose mixed-use development. We are easily accessible from Bethesda, Rockville, Washington DC, and the greater DMV area.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-a3">
+          <span class="faq-question-text">What are MUI's hours?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" id="faq-a3" role="region">
+          <div class="faq-answer-inner">
+            <p>MUI Supper Club is open Tuesday through Saturday from 6:00 PM to 11:00 PM. We are closed on Sundays and Mondays.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-a4">
+          <span class="faq-question-text">Does MUI offer omakase dining?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" id="faq-a4" role="region">
+          <div class="faq-answer-inner">
+            <p>Yes. MUI features an intimate 6-seat omakase counter where our chef presents a 12-course seasonal tasting menu over approximately 3 hours. The omakase experience follows the rhythm of the seasons, with each plate a dialogue between tradition and the unexpected. Reservations are required.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-a5">
+          <span class="faq-question-text">What are MUI's signature dishes?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" id="faq-a5" role="region">
+          <div class="faq-answer-inner">
+            <p>MUI's signature dishes include The Eternal Flame (72-hour koji-aged A5 wagyu tomahawk with wara-yaki fire), Ocean's Treasure Chest (a locked wooden chest revealing an omakase seafood platter), Phoenix Egg (a gold-leafed sphere torched tableside), The Golden Spoon (A5 wagyu tartare with Kaluga caviar), and Black Dragon Roll (tempura lobster with torched A5 wagyu). All feature theatrical tableside presentations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-a6">
+          <span class="faq-question-text">How do I make a reservation?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" id="faq-a6" role="region">
+          <div class="faq-answer-inner">
+            <p>Reservations can be made by emailing <a href="mailto:mui.modern.japanese@gmail.com" style="color: var(--gold);">mui.modern.japanese@gmail.com</a>. We recommend reserving in advance, especially for weekend evenings and the omakase counter, which has only 6 seats.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section class="section reservation" id="reservation" aria-label="Reservations">
+    <div class="reveal">
+      <span class="section-label">Join Us</span>
+      <h2 class="section-title">Reserve Your Evening</h2>
+      <p class="section-title-jp">ご予約</p>
+      <p class="reservation-subtitle">An intimate experience awaits. We recommend reserving in advance to secure your preferred evening.</p>
+      <div class="reservation-info">
+        <div class="reservation-info-item">
+          <p class="reservation-info-label">Hours</p>
+          <p class="reservation-info-value">Tuesday — Saturday<br>6:00 PM — 11:00 PM</p>
+        </div>
+        <div class="reservation-info-item">
+          <p class="reservation-info-label">Location</p>
+          <p class="reservation-info-value">Pike &amp; Rose<br>North Bethesda, MD</p>
+        </div>
+        <div class="reservation-info-item">
+          <p class="reservation-info-label">Contact</p>
+          <p class="reservation-info-value"><a href="mailto:mui.modern.japanese@gmail.com">mui.modern.japanese<br>@gmail.com</a></p>
+        </div>
+      </div>
+      <a href="mailto:mui.modern.japanese@gmail.com" class="reservation-cta">Make a Reservation</a>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">無為</span>
+        <span class="footer-tagline">Where Fire Meets the Sea</span>
+      </div>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="#philosophy">Philosophy</a>
+          <a href="#cuisine">Cuisine</a>
+          <a href="#signatures">Signatures</a>
+          <a href="#omakase">Omakase</a>
+          <a href="#menu">Menu</a>
+          <a href="#faq">FAQ</a>
+          <a href="#reservation">Reserve</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <p class="footer-contact-label">Inquiries</p>
+        <p class="footer-contact-value">
+          <a href="mailto:mui.modern.japanese@gmail.com">mui.modern.japanese@gmail.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 MUI 無為. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">WeChat</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    <h2>About MUI Supper Club</h2>
+    <p>MUI Supper Club is a haute Japanese restaurant located at Pike and Rose, 11830 Grand Park Ave, North Bethesda, Maryland 20852. MUI serves the greater DMV area including Washington DC, Bethesda, Rockville, Silver Spring, Arlington, Tysons, and Northern Virginia.</p>
+    <p>MUI specializes in A5 Miyazaki wagyu, omakase dining, robata grill, Edomae sushi, sashimi, and craft Japanese cocktails. The restaurant features a main dining room, a 6-seat omakase counter, and a lounge bar. Open Tuesday through Saturday, 6:00 PM to 11:00 PM.</p>
+    <p>Signature dishes include The Eternal Flame (koji-aged A5 wagyu tomahawk), Ocean's Treasure Chest (omakase seafood platter), Phoenix Egg (gold-leafed foie gras sphere), The Golden Spoon (wagyu tartare with caviar), Black Dragon Roll, MUI Tomahawk, Hot Rock Experience, Lobster Dynamite, Smoke and Fire Gyoza, Golden Seiro Tower, Crystal Seafood Terrarium, Jukusei Toro Jewel Box, Sakura Smoke Garden, Wagyu Niku Kappo, Rebirth of the Dragon, Golden Phoenix Roll, Chef's Sashimi Omakase, The Smoke Sphere, Matcha Lava Cake, and Dragon's Breath cocktail.</p>
+    <p>MUI draws its philosophy from Wu Wei, the Daoist principle of effortless action. The name MUI (無為) means acting in accordance with the natural flow. The restaurant concept blends Mediterranean and Japanese cuisine in an izakaya-inspired shared plates format with theatrical tableside presentations.</p>
+    <p>For reservations at MUI Supper Club, email mui.modern.japanese@gmail.com. MUI is one of the best Japanese restaurants in the DMV area, offering a luxury fine dining experience comparable to top restaurants in New York, Los Angeles, and Tokyo.</p>
+  </div>
+
+  <script>
+    // ── Preloader ──
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+      }, 1800);
+    });
+
+    // ── Custom Cursor ──
+    const cursor = document.getElementById('cursor');
+    let cursorX = 0, cursorY = 0, currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+    });
+
+    function animateCursor() {
+      currentX += (cursorX - currentX) * 0.15;
+      currentY += (cursorY - currentY) * 0.15;
+      cursor.style.left = currentX + 'px';
+      cursor.style.top = currentY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effects
+    document.querySelectorAll('a, button, .cuisine-card, .sig-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+
+    // Hide cursor on mobile
+    if ('ontouchstart' in window) {
+      cursor.style.display = 'none';
+    }
+
+    // ── Nav Scroll ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // ── Mobile Menu ──
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      const isOpen = mobileMenu.classList.contains('active');
+      navToggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    function closeMobileMenu() {
+      navToggle.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    // ── Scroll Reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // ── Signature Scroll Navigation ──
+    function scrollSig(dir) {
+      const scroll = document.getElementById('sigScroll');
+      const cardWidth = scroll.querySelector('.sig-card').offsetWidth + 24;
+      scroll.scrollBy({ left: dir * cardWidth * 2, behavior: 'smooth' });
+    }
+
+    // Touch/drag scroll for signature gallery
+    const sigScroll = document.getElementById('sigScroll');
+    let isDown = false, startX, scrollLeft;
+
+    sigScroll.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - sigScroll.offsetLeft;
+      scrollLeft = sigScroll.scrollLeft;
+      sigScroll.style.cursor = 'grabbing';
+    });
+
+    sigScroll.addEventListener('mouseleave', () => { isDown = false; sigScroll.style.cursor = ''; });
+    sigScroll.addEventListener('mouseup', () => { isDown = false; sigScroll.style.cursor = ''; });
+    sigScroll.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - sigScroll.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      sigScroll.scrollLeft = scrollLeft - walk;
+    });
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // Close all open items
+        document.querySelectorAll('.faq-item.open').forEach(openItem => {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // Toggle current
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ── Parallax on hero ──
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('.hero-content');
+      if (hero) {
+        const scroll = window.scrollY;
+        hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        hero.style.opacity = 1 - scroll / 800;
+      }
+    });
+  </script>
+
+</body>
+</html>
